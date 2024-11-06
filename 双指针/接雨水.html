@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>接雨水 - 剑指Offer</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../数组/数组.html"><strong aria-hidden="true">1.</strong> 数组</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../数组/二分查找.html"><strong aria-hidden="true">1.1.</strong> 二分查找</a></li><li class="chapter-item expanded "><a href="../数组/旋转数组.html"><strong aria-hidden="true">1.2.</strong> 旋转数组</a></li><li class="chapter-item expanded "><a href="../数组/矩阵.html"><strong aria-hidden="true">1.3.</strong> 矩阵</a></li></ol></li><li class="chapter-item expanded "><a href="../链表/链表.html"><strong aria-hidden="true">2.</strong> 链表</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../链表/反转链表.html"><strong aria-hidden="true">2.1.</strong> 反转链表</a></li></ol></li><li class="chapter-item expanded "><a href="../哈希表.html"><strong aria-hidden="true">3.</strong> 哈希表</a></li><li class="chapter-item expanded "><a href="../字符串.html"><strong aria-hidden="true">4.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../双指针/双指针.html"><strong aria-hidden="true">5.</strong> 双指针</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../双指针/移动元素.html"><strong aria-hidden="true">5.1.</strong> 移动元素</a></li><li class="chapter-item expanded "><a href="../双指针/三数之和.html"><strong aria-hidden="true">5.2.</strong> 三数之和</a></li><li class="chapter-item expanded "><a href="../双指针/接雨水.html" class="active"><strong aria-hidden="true">5.3.</strong> 接雨水</a></li></ol></li><li class="chapter-item expanded "><a href="../栈与队列.html"><strong aria-hidden="true">6.</strong> 栈与队列</a></li><li class="chapter-item expanded "><a href="../二叉树/二叉树.html"><strong aria-hidden="true">7.</strong> 二叉树</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../二叉树/二叉树遍历.html"><strong aria-hidden="true">7.1.</strong> 二叉树遍历</a></li><li class="chapter-item expanded "><a href="../二叉树/路径之和.html"><strong aria-hidden="true">7.2.</strong> 路径之和</a></li><li class="chapter-item expanded "><a href="../二叉树/二叉树半径.html"><strong aria-hidden="true">7.3.</strong> 二叉树半径</a></li><li class="chapter-item expanded "><a href="../二叉树/二叉树右视图.html"><strong aria-hidden="true">7.4.</strong> 二叉树右视图</a></li></ol></li><li class="chapter-item expanded "><a href="../回溯.html"><strong aria-hidden="true">8.</strong> 回溯</a></li><li class="chapter-item expanded "><a href="../贪心.html"><strong aria-hidden="true">9.</strong> 贪心</a></li><li class="chapter-item expanded "><a href="../动态规划.html"><strong aria-hidden="true">10.</strong> 动态规划</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">剑指Offer</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<h1 id="接雨水"><a class="header" href="#接雨水">接雨水</a></h1>
+<ul>
+<li><a href="#11-container-with-most-water">11. Container With Most Water</a>
+<ul>
+<li><a href="#%E6%80%9D%E8%B7%AF">思路</a></li>
+<li><a href="#c-%E8%A7%A3%E6%B3%95">C++ 解法</a></li>
+<li><a href="#java-%E8%A7%A3%E6%B3%95">Java 解法</a></li>
+<li><a href="#python-%E8%A7%A3%E6%B3%95">Python 解法</a></li>
+</ul>
+</li>
+<li><a href="#42-trapping-rain-water">42. Trapping Rain Water</a>
+<ul>
+<li><a href="#%E6%80%9D%E8%B7%AF-1">思路</a></li>
+<li><a href="#c-%E8%A7%A3%E6%B3%95-1">C++ 解法</a></li>
+<li><a href="#java-%E8%A7%A3%E6%B3%95-1">Java 解法</a></li>
+<li><a href="#python-%E8%A7%A3%E6%B3%95-1">Python 解法</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="11-container-with-most-water"><a class="header" href="#11-container-with-most-water"><a href="https://leetcode.com/problems/container-with-most-water/">11. Container With Most Water</a></a></h1>
+<p>You are given an integer array <code>height</code> of length <code>n</code>. There are <code>n</code> vertical lines drawn such that the two endpoints of the <code>ith</code> line are <code>(i, 0)</code> and <code>(i, height[i])</code>.</p>
+<p>Find two lines that together with the x-axis form a container, such that the container contains the most water.</p>
+<p>Return <em>the maximum amount of water a container can store</em>.</p>
+<p><strong>Notice</strong> that you may not slant the container.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/07/17/question_11.jpg" alt="" /></p>
+<p><strong>Input:</strong> <code>height = [1,8,6,2,5,4,8,3,7]</code><br />
+<strong>Output:</strong> 49<br />
+<strong>Explanation:</strong> The above vertical lines are represented by array <code>[1,8,6,2,5,4,8,3,7]</code>. In this case, the max area of water (blue section) the container can contain is 49.</p>
+<p><strong>Example 2:</strong></p>
+<p><strong>Input:</strong> <code>height = [1,1]</code><br />
+<strong>Output:</strong> 1</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == height.length</code></li>
+<li><code>2 &lt;= n &lt;= 10^5</code></li>
+<li><code>0 &lt;= height[i] &lt;= 10^4</code></li>
+</ul>
+<h2 id="思路"><a class="header" href="#思路">思路</a></h2>
+<p>双指针，左低移左，右低移右</p>
+<p>The two-pointer technique starts with the widest container and moves the pointers inward based on the comparison of heights.</p>
+<p>Increasing the width of the container can only lead to a larger area if the height of the new boundary is greater. By moving the pointers towards the center, we explore containers with the potential for greater areas.</p>
+<h2 id="c-解法"><a class="header" href="#c-解法">C++ 解法</a></h2>
+<pre><code class="language-cpp">class Solution {
+public:
+    int maxArea(vector&lt;int&gt;&amp; height) {
+        int left = 0;
+        int right = height.size() - 1;
+        int maxArea = 0;
+
+        while (left &lt; right) {
+            int currentArea = min(height[left], height[right]) * (right - left);
+            maxArea = max(maxArea, currentArea);
+
+            if (height[left] &lt; height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return maxArea;
+    }
+};
+</code></pre>
+<h2 id="java-解法"><a class="header" href="#java-解法">Java 解法</a></h2>
+<pre><code class="language-java">class Solution {
+    public int maxArea(int[] height) {
+        int result = 0;
+        int left = 0; 
+        int right = height.length - 1;
+        while(left &lt;= right){
+            result = Math.max(result, Math.min(height[right],height[left])*(right-left));
+            if(height[right] &lt; height[left]) right--;
+            else left++;
+        }
+        return result;
+    }
+}
+</code></pre>
+<h2 id="python-解法"><a class="header" href="#python-解法">Python 解法</a></h2>
+<pre><code class="language-python">class Solution:
+    def maxArea(self, height: List[int]) -&gt; int:
+        left = 0
+        right = len(height) - 1
+        maxArea = 0
+
+        while left &lt; right:
+            currentArea = min(height[left], height[right]) * (right - left)
+            maxArea = max(maxArea, currentArea)
+
+            if height[left] &lt; height[right]:
+                left += 1
+            else:
+                right -= 1
+
+        return maxArea
+</code></pre>
+<h1 id="42-trapping-rain-water"><a class="header" href="#42-trapping-rain-water"><a href="https://leetcode.com/problems/trapping-rain-water/">42. Trapping Rain Water</a></a></h1>
+<p>Given <code>n</code> non-negative integers representing an elevation map where the width of each bar is <code>1</code>, compute how much water it can trap after raining.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/22/rainwatertrap.png" alt="" /></p>
+<p><strong>Input:</strong> <code>height = [0,1,0,2,1,0,1,3,2,1,2,1]</code><br />
+<strong>Output:</strong> 6<br />
+<strong>Explanation:</strong> The above elevation map (black section) is represented by array <code>[0,1,0,2,1,0,1,3,2,1,2,1]</code>. In this case, 6 units of rain water (blue section) are being trapped.</p>
+<p><strong>Example 2:</strong></p>
+<p><strong>Input:</strong> <code>height = [4,2,0,3,2,5]</code><br />
+<strong>Output:</strong> 9</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == height.length</code></li>
+<li><code>1 &lt;= n &lt;= 2 * 10^4</code></li>
+<li><code>0 &lt;= height[i] &lt;= 10^5</code></li>
+</ul>
+<h2 id="思路-1"><a class="header" href="#思路-1">思路</a></h2>
+<p>一共三种解法：双指针、单调栈和动态规划。</p>
+<h2 id="c-解法-1"><a class="header" href="#c-解法-1">C++ 解法</a></h2>
+<p>单调栈</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int trap(vector&lt;int&gt;&amp; height) {
+        if(height.size() &lt;= 2) return 0;
+        int result = 0;
+        stack&lt;int&gt; st;
+        st.push(0);
+        for(int i = 1; i &lt; height.size(); i++){
+            if(height[i] &lt; height[st.top()]){
+                st.push(i);
+            }else if(height[i] == height[st.top()]){
+                st.push(i);
+            }else{
+               while(!st.empty() &amp;&amp; height[i] &gt; height[st.top()]){
+                    int mid = st.top();
+                    st.pop();
+                    if(!st.empty()){
+                        int h = min(height[i], height[st.top()]) - height[mid];
+                        int w = i - st.top() - 1;
+                        result += h * w;
+                    }
+               }
+               st.push(i);
+            }
+        }
+        return result;
+    }
+};
+</code></pre>
+<h2 id="java-解法-1"><a class="header" href="#java-解法-1">Java 解法</a></h2>
+<p>双指针</p>
+<pre><code class="language-java">class Solution {
+    public int trap(int[] height) {
+        int i=0,left_max=height[0];
+        int sum=0;
+        int j=height.length-1,right_max=height[j];
+        while(i &lt; j){
+            if(left_max &lt;= right_max){
+                sum += left_max - height[i];
+                i++;
+                left_max = Math.max(left_max, height[i]);
+            }else{
+                sum += right_max - height[j];
+                j--;
+                right_max = Math.max(right_max, height[j]);
+            }
+        }
+        return sum;
+    }
+}
+</code></pre>
+<h2 id="python-解法-1"><a class="header" href="#python-解法-1">Python 解法</a></h2>
+<p>双指针</p>
+<pre><code class="language-python">class Solution:
+    def trap(self, height: List[int]) -&gt; int:
+        i = 0
+        left_max = height[0]
+        sum = 0
+        j = len(height) - 1
+        right_max = height[j]
+        while i &lt; j:
+            if left_max &lt;= right_max:
+                sum += left_max - height[i]
+                i += 1
+                left_max = max(left_max, height[i])
+            else:
+                sum += right_max - height[j]
+                j -= 1
+                right_max = max(right_max, height[j])
+        return sum
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../双指针/三数之和.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../栈与队列.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../双指针/三数之和.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../栈与队列.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
